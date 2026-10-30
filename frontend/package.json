@@ -1,18 +1,18 @@
 {
-  "name": "frontend",
+  "name": "pxp-frontend",
   "version": "1.0.0",
   "keywords": [
-    "Trackr"
+    "PXP Project Progress"
   ],
-  "homepage": "https://github.com/juandavidperez/Trackr#readme",
+  "homepage": "https://github.com/udaye-gwd/PXP-project-progress#readme",
   "bugs": {
-    "url": "https://github.com/juandavidperez/Trackr/issues"
+    "url": "https://github.com/udaye-gwd/PXP-project-progress/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juandavidperez/Trackr.git"
+    "url": "git+https://github.com/udaye-gwd/PXP-project-progress.git"
   },
-  "author": "juandavidperez",
+  "author": "Uday Kiran Eediga <eedigaudaygoud@gmail.com>",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -1,148 +1,158 @@
-# Trackr
+# PXP – ProjectXProgress
 
-A full-stack project management application with Kanban boards, team collaboration, and task tracking. Built with Angular 21 + Spring Boot 3.
+**A Full-Stack Project Management Platform**
 
-> **Live Demo:** [https://trackr-pm.netlify.app](https://trackr-pm.netlify.app) · **API:** [https://trackr-api-kxgo.onrender.com](https://trackr-api-kxgo.onrender.com) · **Swagger:** [API Docs](https://trackr-api-kxgo.onrender.com/swagger-ui/index.html)
+PXP (ProjectXProgress) is a full-stack project management application designed to help teams organize projects, collaborate efficiently, manage tasks, and track progress through an interactive dashboard and Kanban board.
 
-![Trackr Dashboard](docs/screenshots/dashboard.png)
+Built using Angular 21, Spring Boot 3, and PostgreSQL.
+
+![PXP Dashboard](docs/screenshots/dashboard.png)
 
 ---
 
-## About
+## About the Project
 
-Trackr helps teams organize projects and track tasks through an intuitive Kanban-style interface. Users can create projects, invite team members, assign tasks with priorities and deadlines, and visualize progress through a dashboard with real-time metrics.
+PXP provides a centralized platform for managing projects and team activities. Users can create projects, invite team members, assign tasks, set priorities and deadlines, and monitor project progress.
 
-### Key Features
+The application includes secure authentication, role-based access, task management, project analytics, and a responsive user interface.
 
-- **Authentication** — Register and login with JWT-based auth (access + refresh tokens). Sessions persist securely without re-login.
-- **Project Management** — Create projects, invite members by email, and manage team access with owner/member roles.
-- **Kanban Board** — Drag-and-drop tasks between columns (To Do, In Progress, Done). Visual indicators for priority and deadlines.
-- **My Tasks** — Personal task view with filters by project, status, priority, and search. Paginated for performance.
-- **Task Filtering** — Search, filter by status/priority/assignee, and sort by date or priority. All server-side with pagination.
-- **Dashboard** — Overview of tasks by status, overdue items, recent activity, and a productivity chart.
-- **API Documentation** — Interactive Swagger UI with JWT auth support for testing endpoints.
-- **Responsive Design** — Fully usable on desktop, tablet, and mobile. Collapsible sidebar and horizontal-scroll Kanban on small screens.
+## Key Features
+
+- **Authentication:** Secure registration and login using JWT access and refresh tokens.
+- **Project Management:** Create, update, and manage projects.
+- **Team Collaboration:** Invite members and manage project access.
+- **Kanban Board:** Organize tasks into To Do, In Progress, and Done columns.
+- **Task Management:** Create, assign, update, and delete tasks.
+- **Task Filtering:** Filter and search tasks by project, status, priority, and assignee.
+- **Dashboard:** View project statistics, task progress, overdue tasks, and recent activity.
+- **Role-Based Access:** Owner and member permissions.
+- **API Documentation:** Interactive Swagger UI.
+- **Responsive Design:** Supports desktop, tablet, and mobile screens.
 
 ---
 
 ## Screenshots
 
 | Login | Register |
-|-------|----------|
+|---|---|
 | ![Login](docs/screenshots/login.png) | ![Register](docs/screenshots/register.png) |
 
 | Dashboard | Projects |
-|-----------|----------|
+|---|---|
 | ![Dashboard](docs/screenshots/dashboard.png) | ![Projects](docs/screenshots/projects.png) |
 
 | Kanban Board | My Tasks |
-|-------------|----------|
+|---|---|
 | ![Board](docs/screenshots/board.png) | ![Tasks](docs/screenshots/tasks.png) |
 
-| Members Panel | Mobile View |
-|--------------|-------------|
+| Members | Mobile View |
+|---|---|
 | ![Members](docs/screenshots/members.png) | ![Mobile](docs/screenshots/mobile.png) |
 
-| Swagger API Docs |
-|-----------------|
+| API Documentation |
+|---|
 | ![Swagger](docs/screenshots/swagger.png) |
 
 ---
 
-## Tech Stack
+## Technology Stack
 
 | Layer | Technology |
-|-------|-----------|
-| Frontend | Angular 21, TypeScript 5.9, Tailwind CSS 4, CDK Drag & Drop |
-| Backend | Java 17, Spring Boot 3, Spring Security, Spring Data JPA |
+|---|---|
+| Frontend | Angular 21, TypeScript |
+| Styling | Tailwind CSS 4 |
+| Backend | Java 17, Spring Boot 3 |
+| Security | Spring Security, JWT, BCrypt |
 | Database | PostgreSQL 16 |
-| Auth | JWT (access + refresh tokens), BCrypt |
-| Docs | SpringDoc OpenAPI 2.3 (Swagger UI) |
-| Testing | Vitest (frontend, 95 tests), JUnit 5 + Mockito (backend, 118 tests) |
+| ORM | Spring Data JPA, Hibernate |
+| API Documentation | SpringDoc OpenAPI, Swagger UI |
+| Testing | Vitest, JUnit 5, Mockito |
 | CI/CD | GitHub Actions |
-| DevOps | Docker, Docker Compose, Nginx |
-| Deploy | Netlify (frontend), Render (backend), Supabase (database) |
+| Containerization | Docker, Docker Compose |
 
 ---
 
-## Architecture
+## Application Architecture
 
-```
-┌─────────────────┐         ┌──────────────────────┐         ┌────────────┐
-│                 │  HTTP   │                      │   JPA   │            │
-│  Angular SPA    │────────▶│  Spring Boot API     │────────▶│ PostgreSQL │
-│  (Netlify)      │◀────────│  (Render)            │◀────────│ (Supabase) │
-│                 │  JSON   │                      │         │            │
-└─────────────────┘         └──────────────────────┘         └────────────┘
-                                     │
-                            ┌────────┴────────┐
-                            │  Spring Security │
-                            │  JWT + Rate Limit│
-                            └─────────────────┘
-```
-
-### Project Structure
-
-```
-trackr/
-├── backend/
-│   ├── src/main/java/com/trackr/
-│   │   ├── config/          # Security, CORS, OpenAPI, Rate Limiting
-│   │   ├── controller/      # REST controllers (OpenAPI documented)
-│   │   ├── dto/             # Request/response objects
-│   │   ├── exception/       # Global exception handling
-│   │   ├── model/           # JPA entities
-│   │   ├── repository/      # Spring Data repositories
-│   │   ├── security/        # JWT provider, filter, entry point
-│   │   └── service/         # Business logic
-│   ├── src/main/resources/
-│   │   ├── application.yml       # Base config
-│   │   ├── application-dev.yml   # Dev profile (safe defaults)
-│   │   └── application-prod.yml  # Prod profile
-│   ├── Dockerfile
-│   └── pom.xml
-├── frontend/
-│   ├── src/app/
-│   │   ├── core/            # Services, guards, interceptors, models
-│   │   ├── features/
-│   │   │   ├── auth/        # Login & Register
-│   │   │   ├── dashboard/   # Dashboard with stats & charts
-│   │   │   ├── projects/    # Project list & Kanban detail
-│   │   │   └── tasks/       # My Tasks page
-│   │   └── shared/          # Layout, toast, task form modal
-│   ├── src/environments/
-│   ├── Dockerfile
-│   └── nginx.conf
-├── .github/workflows/ci.yml  # CI pipeline
-├── docker-compose.yml         # Dev environment
-├── docker-compose.prod.yml    # Production build
-└── .env.example
+```text
++---------------------+
+|                     |
+|    Angular 21       |
+|    Frontend         |
+|                     |
++----------+----------+
+           |
+           | HTTP / REST API
+           |
++----------v----------+
+|                     |
+|    Spring Boot 3    |
+|    Backend API      |
+|                     |
+|  Spring Security    |
+|  JWT Authentication|
+|  Business Logic     |
+|                     |
++----------+----------+
+           |
+           | JPA / Hibernate
+           |
++----------v----------+
+|                     |
+|    PostgreSQL 16    |
+|    Database         |
+|                     |
++---------------------+
 ```
 
----
+## Project Structure
 
-## Data Model
+```text
+PXP-project-progress/
+|
+|-- backend/
+|   |-- src/main/java/com/trackr/
+|   |   |-- config/
+|   |   |-- controller/
+|   |   |-- dto/
+|   |   |-- exception/
+|   |   |-- model/
+|   |   |-- repository/
+|   |   |-- security/
+|   |   |-- service/
+|   |
+|   |-- src/main/resources/
+|   |-- Dockerfile
+|   |-- pom.xml
+|
+|-- frontend/
+|   |-- src/app/
+|   |   |-- core/
+|   |   |-- features/
+|   |   |   |-- auth/
+|   |   |   |-- dashboard/
+|   |   |   |-- projects/
+|   |   |   |-- tasks/
+|   |   |-- shared/
+|   |
+|   |-- src/environments/
+|   |-- Dockerfile
+|   |-- nginx.conf
+|
+|-- docs/
+|   |-- screenshots/
+|
+|-- .github/
+|   |-- workflows/
+|       |-- ci.yml
+|
+|-- docker-compose.yml
+|-- docker-compose.prod.yml
+|-- .env.example
+|-- README.md
+```
 
-```
-┌──────────┐       ┌──────────────────┐       ┌──────────┐
-│  User    │──────▶│ project_members  │◀──────│ Project  │
-│          │  M:N  │ (user_id,        │  M:N  │          │
-│ id       │       │  project_id)     │       │ id       │
-│ email    │       └──────────────────┘       │ name     │
-│ password │                                  │ owner_id │
-│ name     │                                  └─────┬────┘
-│ role     │                                        │
-└─────┬────┘                                        │ 1:N
-      │                                             │
-      │ assigned_to                           ┌─────┴────┐
-      └──────────────────────────────────────▶│  Task    │
-                                        N:1   │ id       │
-                                              │ title    │
-                                              │ status   │  TODO | IN_PROGRESS | DONE
-                                              │ priority │  LOW | MEDIUM | HIGH
-                                              │ due_date │
-                                              └──────────┘
-```
+*Note: The existing Java package is retained internally as `com.trackr`; this does not affect the PXP branding.*
 
 ---
 
@@ -150,118 +160,170 @@ trackr/
 
 ### Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+- Java 17
+- Node.js and npm
+- PostgreSQL 16
+- Git
+- Docker and Docker Compose (if using the containerized setup)
 
-No need to install Java, Node.js, or PostgreSQL locally.
-
-### 1. Clone and configure
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/juandavidperez/Trackr.git
-cd Trackr
+git clone https://github.com/udaye-gwd/PXP-project-progress.git
+cd PXP-project-progress
+```
+
+### 2. Configure the Environment
+
+Create your environment configuration using the example file:
+
+```bash
 cp .env.example .env
 ```
 
-### 2. Start all services
+Configure the required database and authentication settings in `.env`.
+
+### 3. Start the Backend
+
+Navigate to the backend folder:
 
 ```bash
-docker compose up
+cd backend
 ```
 
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:4200 |
-| Backend API | http://localhost:8080 |
-| Swagger UI | http://localhost:8080/swagger-ui/index.html |
-| PostgreSQL | localhost:5432 |
+Run the Spring Boot application using the development profile:
 
-### 3. Login with seed data
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
 
-The database is seeded with test users:
+On Windows PowerShell:
+
+```powershell
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=dev"
+```
+
+Backend URL:
+
+`http://localhost:8080`
+
+### 4. Start the Frontend
+
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Frontend URL:
+
+`http://localhost:4200`
+
+### 5. API Documentation
+
+Once the backend is running, access Swagger UI:
+
+`http://localhost:8080/swagger-ui/index.html`
+
+---
+
+## Demo Login Credentials
+
+The development database includes the following test accounts:
 
 | Email | Password | Role |
-|-------|----------|------|
+|---|---|---|
 | admin@trackr.dev | password123 | Admin |
 | alice@trackr.dev | password123 | Member |
 | bob@trackr.dev | password123 | Member |
 
-### 4. Stop services
-
-```bash
-docker compose down        # Stop containers
-docker compose down -v     # Stop and reset database
-```
+*These are development test credentials. Do not use them in production.*
 
 ---
 
 ## API Endpoints
 
-Full API documentation available at [Swagger UI](https://trackr-api-kxgo.onrender.com/swagger-ui/index.html).
-
-| Method | Endpoint | Description | Auth |
-|--------|---------|-------------|------|
-| GET | `/api/health` | Health check | No |
-| POST | `/api/auth/register` | Register a new user | No |
-| POST | `/api/auth/login` | Login and receive tokens | No |
-| POST | `/api/auth/refresh` | Refresh access token | No |
-| GET | `/api/dashboard` | Dashboard statistics | Yes |
-| GET | `/api/projects` | List user's projects (paginated) | Yes |
-| POST | `/api/projects` | Create a project | Yes |
-| GET | `/api/projects/:id` | Get project details | Yes |
-| PUT | `/api/projects/:id` | Update a project | Owner |
-| DELETE | `/api/projects/:id` | Delete a project | Owner |
-| GET | `/api/projects/:id/stats` | Project statistics | Member |
-| GET | `/api/projects/:id/members` | List project members | Member |
-| POST | `/api/projects/:id/members` | Add a member by email | Owner |
-| DELETE | `/api/projects/:id/members/:userId` | Remove a member | Owner |
-| GET | `/api/tasks/me` | My assigned tasks (filtered, paginated) | Yes |
-| POST | `/api/tasks` | Create a task | Member |
-| PUT | `/api/tasks/:id` | Update a task | Member |
-| PATCH | `/api/tasks/:id/status` | Change task status | Member |
-| DELETE | `/api/tasks/:id` | Delete a task | Owner |
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/health` | Health check |
+| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/login` | Authenticate a user |
+| POST | `/api/auth/refresh` | Refresh access token |
+| GET | `/api/dashboard` | Dashboard statistics |
+| GET | `/api/projects` | List projects |
+| POST | `/api/projects` | Create a project |
+| GET | `/api/projects/:id` | Get project details |
+| PUT | `/api/projects/:id` | Update a project |
+| DELETE | `/api/projects/:id` | Delete a project |
+| GET | `/api/projects/:id/members` | List project members |
+| POST | `/api/projects/:id/members` | Add a project member |
+| GET | `/api/tasks/me` | Get assigned tasks |
+| POST | `/api/tasks` | Create a task |
+| PUT | `/api/tasks/:id` | Update a task |
+| PATCH | `/api/tasks/:id/status` | Update task status |
+| DELETE | `/api/tasks/:id` | Delete a task |
 
 ---
 
 ## Testing
 
-```bash
-# Backend (118 tests)
-docker compose exec backend ./mvnw test
+### Backend Tests
 
-# Frontend (95 tests)
-docker compose exec frontend npx ng test --watch=false
+```bash
+cd backend
+./mvnw test
 ```
 
-CI runs automatically on every push and pull request via GitHub Actions.
+### Frontend Tests
+
+```bash
+cd frontend
+npm test
+```
+
+The project also uses GitHub Actions for automated CI checks.
 
 ---
 
 ## Environment Variables
 
-| Variable | Description | Default (dev) |
-|----------|------------|---------------|
-| `POSTGRES_DB` | Database name | `trackr` |
-| `POSTGRES_USER` | Database user | `trackr` |
-| `POSTGRES_PASSWORD` | Database password | `trackr_dev` |
-| `JWT_SECRET` | JWT signing key (min 256-bit) | dev default in `.env.example` |
-| `JWT_ACCESS_EXPIRATION` | Access token TTL (ms) | `900000` (15 min) |
-| `JWT_REFRESH_EXPIRATION` | Refresh token TTL (ms) | `604800000` (7 days) |
-| `CORS_ALLOWED_ORIGINS` | Allowed frontend origins | `http://localhost:4200` |
+| Variable | Description |
+|---|---|
+| `POSTGRES_DB` | PostgreSQL database name |
+| `POSTGRES_USER` | Database username |
+| `POSTGRES_PASSWORD` | Database password |
+| `JWT_SECRET` | JWT signing secret |
+| `JWT_ACCESS_EXPIRATION` | Access token expiration |
+| `JWT_REFRESH_EXPIRATION` | Refresh token expiration |
+| `CORS_ALLOWED_ORIGINS` | Allowed frontend origins |
+
+Refer to `.env.example` for the environment configuration.
 
 ---
 
-## Technical Decisions
+## Future Improvements
 
-- **Fully Dockerized** — The entire stack runs in containers. Source code is volume-mounted for hot reload in development.
-- **JWT with refresh tokens** — Access tokens expire in 15 minutes. Refresh tokens (7 days) allow seamless re-authentication. The Angular interceptor handles refresh transparently.
-- **Server-side filtering & pagination** — All task filtering, sorting, and search uses Spring Data Pageable with query parameters. Frontend stays lightweight as data grows.
-- **DTOs over entities** — API responses use dedicated DTOs, preventing circular serialization and decoupling the API contract from the database schema.
-- **Rate limiting** — Bucket4j token-bucket per client IP (10 req/min for auth, 60 req/min for other endpoints).
-- **CDK drag-and-drop with signals** — Kanban columns are hardcoded DOM nodes (not dynamically rendered) to prevent Angular signal re-renders from interfering with CDK's drag state.
-- **Spring profiles** — `dev` profile has safe defaults; `prod` profile requires all secrets via environment variables.
+- Real-time notifications
+- Advanced project analytics
+- Improved team collaboration
+- File attachments for tasks
+- Enhanced activity tracking
+- Additional dashboard insights
+
+---
+
+## Author
+
+**Uday Kiran**
+
+GitHub: [udaye-gwd](https://github.com/udaye-gwd)
+
+Project Repository: [PXP – ProjectXProgress](https://github.com/udaye-gwd/PXP-project-progress)
 
 ---
 
 ## License
 
-This project is for portfolio and educational purposes.
+This project is developed for portfolio, educational, and learning purposes.

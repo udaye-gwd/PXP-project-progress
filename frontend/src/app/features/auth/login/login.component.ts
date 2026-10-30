@@ -28,7 +28,7 @@ import { AuthService } from '../../../core/services/auth.service';
                 <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
               </svg>
             </div>
-            <span class="text-xl font-semibold tracking-tight text-white" style="font-family: 'Inter', system-ui, sans-serif">Trackr</span>
+            <span class="text-xl font-semibold tracking-tight text-white" style="font-family: 'Inter', system-ui, sans-serif">PXP Project Progress</span>
           </div>
         </div>
 
@@ -42,7 +42,7 @@ import { AuthService } from '../../../core/services/auth.service';
           </p>
         </div>
 
-        <p class="text-sm text-zinc-600">&copy; 2026 Trackr. Built for teams that ship.</p>
+        <p class="text-sm text-zinc-600">&copy; 2026 PXP Project Progress. Built for teams that ship.</p>
       </div>
 
       <!-- Right panel — form -->
@@ -56,7 +56,7 @@ import { AuthService } from '../../../core/services/auth.service';
                 <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
               </svg>
             </div>
-            <span class="text-lg font-semibold text-white">Trackr</span>
+            <span class="text-lg font-semibold text-white">PXP Project Progress</span>
           </div>
 
           <div class="mb-8">
@@ -133,7 +133,7 @@ import { AuthService } from '../../../core/services/auth.service';
     </div>
   `,
 })
-export class LoginComponent {
+export class LoginComponent  {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
@@ -162,3 +162,4 @@ export class LoginComponent {
     });
   }
 }
+

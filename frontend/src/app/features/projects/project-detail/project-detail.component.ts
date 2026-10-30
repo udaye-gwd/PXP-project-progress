@@ -930,7 +930,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.projectService.getById(this.projectId).subscribe({
       next: (project) => {
         this.project.set(project);
-        this.titleService.setTitle(`${project.name} - Trackr`);
+        this.titleService.setTitle(`${project.name} - PXP`);
         this.loadTasks();
         this.loadMembers();
       },
@@ -964,3 +964,4 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     });
   }
 }
+

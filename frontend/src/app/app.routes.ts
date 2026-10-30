@@ -15,13 +15,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        title: 'Dashboard - Trackr',
+        title: 'Dashboard - PXP',
         loadComponent: () =>
           import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
       {
         path: 'projects',
-        title: 'Projects - Trackr',
+        title: 'Projects - PXP',
         loadComponent: () =>
           import('./features/projects/project-list/project-list.component').then(
             (m) => m.ProjectListComponent,
@@ -29,7 +29,7 @@ export const routes: Routes = [
       },
       {
         path: 'tasks',
-        title: 'My Tasks - Trackr',
+        title: 'My Tasks - PXP',
         loadComponent: () =>
           import('./features/tasks/task-list/task-list.component').then(
             (m) => m.TaskListComponent,
@@ -37,7 +37,7 @@ export const routes: Routes = [
       },
       {
         path: 'projects/:id',
-        title: 'Project - Trackr',
+        title: 'Project - PXP',
         loadComponent: () =>
           import('./features/projects/project-detail/project-detail.component').then(
             (m) => m.ProjectDetailComponent,
@@ -48,3 +48,4 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: 'auth/login' },
 ];
+
