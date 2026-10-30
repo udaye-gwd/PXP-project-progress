@@ -33,28 +33,19 @@ The application includes secure authentication, role-based access, task manageme
 
 ## Screenshots
 
-| Login | Register |
-|---|---|
-| ![Login](docs/screenshots/login.png) | ![Register](docs/screenshots/register.png) |
+### Dashboard
+![PXP Dashboard](docs/screenshots/dashboard.png)
 
-| Dashboard | Projects |
-|---|---|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Projects](docs/screenshots/projects.png) |
+### Login
+![PXP Login](docs/screenshots/login.png)
 
-| Kanban Board | My Tasks |
-|---|---|
-| ![Board](docs/screenshots/board.png) | ![Tasks](docs/screenshots/tasks.png) |
+### Projects
+![PXP Projects](docs/screenshots/projects.png)
 
-| Members | Mobile View |
-|---|---|
-| ![Members](docs/screenshots/members.png) | ![Mobile](docs/screenshots/mobile.png) |
-
-| API Documentation |
-|---|
-| ![Swagger](docs/screenshots/swagger.png) |
+### Tasks
+![PXP Tasks](docs/screenshots/tasks.png)
 
 ---
-
 ## Technology Stack
 
 | Layer | Technology |
