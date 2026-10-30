@@ -1,0 +1,8 @@
+[build]
+  command = "npx ng build --configuration production && mv dist/frontend/browser/index.csr.html dist/frontend/browser/index.html && find dist/ -name '*.js' -exec sed -i \"s|__API_URL__|$API_URL|g\" {} +"
+  publish = "dist/frontend/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

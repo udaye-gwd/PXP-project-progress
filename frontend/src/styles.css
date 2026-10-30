@@ -1,0 +1,84 @@
+
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --pxp-bg: #080812;
+  --pxp-purple: #8b5cf6;
+  --pxp-blue: #3b82f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--pxp-bg);
+  color: #f4f4f5;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-image:
+    radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 30%),
+      rgba(124, 58, 237, 0.13),
+      transparent 45%
+    ),
+    radial-gradient(
+      500px circle at 90% 10%,
+      rgba(37, 99, 235, 0.09),
+      transparent 50%
+    );
+  background-attachment: fixed;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+.pxp-glass {
+  background: rgba(20, 20, 38, 0.72);
+  border: 1px solid rgba(139, 92, 246, 0.16);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.pxp-glass:hover {
+  border-color: rgba(139, 92, 246, 0.42);
+  box-shadow: 0 12px 38px rgba(91, 33, 182, 0.12);
+  transform: translateY(-3px);
+}
+
+.pxp-gradient {
+  background: linear-gradient(110deg, #a78bfa, #60a5fa, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
